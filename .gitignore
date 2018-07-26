@@ -1,0 +1,22 @@
+.idea
+.DS_Store
+.vscode
+morgan.log
+package-lock.json
+
+# Built #
+/__build__/
+/__server_build__/
+/node_modules/
+/typings/
+/tsd_typings/
+/dist/
+/dist-server/
+/compiled/
+
+# Node #
+npm-debug.log
+/npm-debug.log.*
+
+# Webpack #
+webpack.records.json
