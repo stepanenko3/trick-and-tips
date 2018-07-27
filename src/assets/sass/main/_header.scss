@@ -1,0 +1,170 @@
+$header-font-size: $base-font-size / 14 * 10;
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: rem( $header-font-size * 6 );
+    padding: rem( $header-font-size * .75 ) rem( $header-font-size * 3 );
+    z-index: 100;
+    transform: translateY( 0 );
+    transition: all .3s;
+
+    &-underlay {
+        position: relative;
+        height: rem( $header-font-size * 6 );
+        width: 100%;
+        display: block;
+    }
+    &_hidden {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY( -100% )
+    }
+
+    &_pinned {
+        background: #fff;
+    }
+
+    &_pinned & {
+        &__cart > span, > a {
+            box-shadow: 0 rem( $header-font-size * .3 ) rem( $header-font-size * .7 ) rem( $header-font-size * -.6 ) rgba( 0, 0, 0, .75 );
+        }
+    }
+
+    &__brand {
+        color: #000;
+        font-weight: 600;
+        text-decoration: none;
+        float: left;
+        display: inline-block;
+        padding: 0 rem( $header-font-size * 1.5 );
+        line-height: rem( $header-font-size * 4.5 );
+        height: rem( $header-font-size * 4.5 );
+
+        &_img {
+            min-width: rem( $header-font-size * 7 );
+            background-size: contain;
+            background-position: center left;
+            background-repeat: no-repeat;
+        }
+    }
+    &__nav {
+        display: inline-block;
+        float: left;
+    }
+    &__cart {
+        > span, > a {
+            display: block;
+            padding: 0 rem( $header-font-size * 2 ) !important;
+            border-radius: rem( $header-font-size * 4.5 );
+            background: #fff;
+            box-shadow: 0 rem( $header-font-size * .3 ) rem( $header-font-size * 1.2 ) rem( $header-font-size * -.6 ) rgba( 0, 0, 0, .75 );
+            transition: all .3s;
+
+            &:after {
+                font-family: StepanenkoFont;
+                content: '\EA02';
+                display: inline-block;
+                line-height: rem( $header-font-size * 2.4 );
+                height: rem( $header-font-size * 2.4 );
+                margin: rem( $header-font-size * .7 ) 0 rem( $header-font-size * .7 ) rem( $header-font-size );
+                padding-left: rem( $header-font-size );
+                border-left: rem( $header-font-size * .1 ) solid #d4d4d4;
+            }
+        }
+    }
+
+    &__sidebar-toggle {
+        display: none;
+        color: #000;
+        font-weight: 600;
+        text-decoration: none;
+        float: right;
+        font-size: rem( $header-font-size * 2 );
+        padding: 0 rem( $header-font-size * 1 );
+        line-height: rem( $header-font-size * 4 );
+        height: rem( $header-font-size * 4 );
+    }
+}
+
+
+.nav {
+    display: block;
+    list-style: none;
+    padding: 0 rem( $header-font-size * 1.5 );
+    height: rem( $header-font-size * 4.5 );
+
+    &__dropdown {
+        position: static;
+
+        .dropdown {
+            &__area {
+                top: rem( $header-font-size * 6 );
+                right: rem( $header-font-size * 3 );
+                transform: translateY( rem( $header-font-size * 4 ) );
+            }
+            &__toggle:before, &__toggle:after {
+                transform: translateY( rem( $header-font-size * 4 ) );
+            }
+        }
+        &.dropdown_open .dropdown {
+            &__area, &__toggle:before, &__toggle:after {
+                transform: translateY( rem( $header-font-size * 1.1 ) );
+            }
+        }
+    }
+
+    &__item {
+        display: inline-block;
+
+        > a, > span {
+            color: #000;
+            height: rem( $header-font-size * 4.5 );
+            line-height: rem( $header-font-size * 4.5 );
+            text-decoration: none;
+            padding: 0 rem( $header-font-size );
+            cursor: pointer;
+        }
+
+        > a {
+            color: rgba( 0, 0, 0, .7 );
+            cursor: pointer;
+
+            &:hover {
+                color: black;
+            }
+        }
+    }
+    &_right {
+        float: right;
+    }
+}
+
+@media ( max-width: map-get( $grid-breakpoints, 3 ) + 1 ) {
+    .navbar {
+        height: rem( $header-font-size * 4 );
+        padding: 0 rem( $header-font-size * .5 );
+
+        &-underlay {
+            height: rem( $header-font-size * 4 );
+        }
+
+        &__brand {
+            padding: 0 rem( $header-font-size * 1 );
+            line-height: rem( $header-font-size * 4 );
+            height: rem( $header-font-size * 4 );
+        }
+
+        &__sidebar-toggle {
+            display: inline-block;
+        }
+    }
+
+    .nav {
+        display: none;
+    }
+
+
+}

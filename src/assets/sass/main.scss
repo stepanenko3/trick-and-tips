@@ -1,0 +1,64 @@
+@import "main/functions";
+@import "main/variables";
+@import "main/mixins";
+@import "main/utilities";
+@import "main/normalize";
+
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content
+    }
+    &:-moz-placeholder {
+        @content
+    }
+    &::-moz-placeholder {
+        @content
+    }
+    &:-ms-input-placeholder {
+        @content
+    }
+}
+
+a {
+    outline: none !important;
+}
+
+ul {
+    margin: 0;
+}
+
+html {
+    font: {
+        family: 'Open Sans', sans-serif;
+        weight: normal;
+        size: 100%;
+    }
+
+    overflow: {
+        x: hidden;
+        y: scroll;
+    }
+
+    width: 100%;
+    max-width: 100%;
+    line-height: 1;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    background: #000;
+    padding: rem(100px) rem(50px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Grid mixins
+//
+
+@import "main/grid";
+@import "main/utilities/flex";

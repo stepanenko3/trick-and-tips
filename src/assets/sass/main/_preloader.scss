@@ -1,0 +1,166 @@
+.ip {
+    &-header {
+        position: fixed;
+        top: 0;
+        z-index: 100000;
+        min-height: 460px;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+
+        h1 {
+            margin: 0;
+        }
+    }
+
+    &-header &-inner {
+        display: block;
+        margin: 0 auto;
+    }
+
+    &-header &-logo svg {
+        position: absolute;
+        //min-height: 200px;
+        //height: 25%;
+
+        path {
+            fill: #f54f3e;
+        }
+    }
+
+    &-header &-loader svg path {
+        fill: none;
+        stroke-width: 6;
+
+        &.ip-loader-circlebg {
+            stroke: #fff;
+        }
+
+        &.ip-loader-circle {
+            transition: stroke-dashoffset 0.2s;
+            stroke: #f54f3e;
+        }
+    }
+
+    &-logo, &-loader {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    &-logo {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        top: 0;
+        height: 100%;
+        transform: translate3d(0,25%,0);
+
+        img {
+            //width: 250px;
+        }
+    }
+
+    &-loader {
+        bottom: 20%;
+    }
+
+    &-main {
+        overflow: hidden;
+        margin: 0 auto;
+    }
+}
+
+.loaded {
+    .ip {
+        &-logo, &-loader {
+            opacity: 1;
+        }
+
+        &-header {
+            animation: animLoadedHeader 1s cubic-bezier(0.7,0,0.3,1) forwards;
+        }
+
+        &-header &-logo svg {
+            max-height: 300px;
+        }
+
+        &-logo {
+            transform-origin: 50% 0;
+            animation: animLoadedLogo 1s cubic-bezier(0.7,0,0.3,1) forwards;
+
+            svg {
+                path {
+                    transition: all 0.5s ease 0.3s;
+                    fill: #fff;
+                }
+            }
+        }
+
+        &-loader {
+            animation: animLoadedLoader 0.5s cubic-bezier(0.7,0,0.3,1) forwards;
+        }
+
+        &-main {
+            .header__title, .header__top, .header__text, .form {
+                animation: animLoadedContent 1s cubic-bezier(0.7,0,0.3,1) both;
+
+            }
+            .header__title {
+                animation-delay: .1s;
+            }
+            .header__top {
+                animation-delay: .1s;
+            }
+        }
+    }
+}
+
+.loading {
+    .ip {
+        &-logo, &-loader {
+            opacity: 1;
+        }
+
+        &-logo {
+            animation: animInitialLogo 1s cubic-bezier(0.7,0,0.3,1) both;
+        }
+
+        &-loader {
+            animation: animInitialLoader 1s cubic-bezier(0.7,0,0.3,1) both;
+        }
+
+    }
+}
+
+@keyframes animInitialLogo {
+    from { opacity: 0; }
+}
+
+@keyframes animInitialLoader {
+    from { opacity: 0; transform: scale3d(0.5,0.5,1); }
+}
+
+@keyframes animLoadedLogo {
+    to { transform: translate3d(0,60%,0) translate3d(0,50px,0) scale3d(0.65,0.65,1) }
+}
+
+@keyframes animLoadedLoader {
+    to { opacity: 0; transform: translate3d(0,-100%,0) scale3d(0.3,0.3,1) }
+}
+
+@keyframes animLoadedHeader {
+    to { transform: translate3d(0,-100%,0) }
+}
+
+@keyframes animLoadedContent {
+    from { opacity: 0; transform: scale3d(0.3,0.3,1); }
+}
+
+/* Change layout class for header */
+.layout-switch .ip-header {
+    position: absolute;
+}

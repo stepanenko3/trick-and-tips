@@ -1,0 +1,18 @@
+$button-font-size: $base-font-size / 14 * 10;
+
+.button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: rem( $button-font-size * .1 ) solid #e4e4e4;
+    border-radius: rem( $button-font-size * 3.4 );
+    height: rem( $button-font-size * 3.4 );
+    line-height: rem( $button-font-size * 3.4 );
+    padding: 0 rem( $button-font-size * 2 );
+    cursor: pointer;
+    vertical-align: middle;
+
+    &__loading {
+
+    }
+}
