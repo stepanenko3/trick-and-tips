@@ -2,11 +2,25 @@
   "name": "work.local",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "webpack --production",
+    "dev": "webpack-dev-server --mode development --open"
+  },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "gsap": "^2.0.1",
+    "jquery": "^3.3.1",
+    "three": "^0.94.0"
+  },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.32",
+    "@babel/core": "^7.0.0-beta.32",
+    "@babel/preset-env": "^7.0.0-beta.32",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-preset-env": "^1.6.1",
     "browser-sync": "^2.23.6",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-changed": "^3.2.0",
@@ -23,7 +37,14 @@
     "gulp-shorthand": "^1.1.0",
     "gulp-size": "^3.0.0",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-uncss": "^1.0.6"
+    "gulp-uncss": "^1.0.6",
+    "node-sass": "^4.9.2",
+    "path": "^0.12.7",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
   },
   "main": "gulpfile.js",
   "author": "",
