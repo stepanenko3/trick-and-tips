@@ -55,6 +55,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    color: #fff;
+
+    p {
+        margin-bottom: 50px;
+        font-size: 26px;
+        line-height: 1.3;
+        width: 50%;
+        transition: transform .1s linear;
+    }
 }
 
 // Grid mixins

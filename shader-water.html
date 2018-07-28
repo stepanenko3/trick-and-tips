@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trick & Tips</title>
+    <link rel="stylesheet" type="text/css" href="/assets/main.css"/>
+</head>
+<body>
+
+<div id="shader-water"></div>
+
+<script id="vertexShaderWater" type="x-shader/x-vertex">
+    varying vec2 vUv;
+    void main() {
+        vUv = (position.xy+1.0)*0.5;
+         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+</script>
+<script id="fragmentShaderWater" type="x-shader/x-fragment">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    varying vec2 vUv;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform float u_time;
+    uniform sampler2D texture;
+    uniform sampler2D map;
+    uniform float u_animation;
+
+    void main() {
+        vec2 m = (u_mouse/u_resolution - 0.5) * 0.02;
+
+        float distort = sin(vUv.y * 50.0 + u_time) * 0.003 + m.x;
+        float map = texture2D(map, vUv).r * u_animation;
+        vec4 color = texture2D(texture, vec2(vUv.x + distort * map, vUv.y));
+
+        gl_FragColor = vec4(color.r, color.g, color.b, 1.0);
+    }
+
+</script>
+<script type="text/javascript" src="/assets/main.js"></script>
+</body>
+</html>
