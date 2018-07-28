@@ -17,17 +17,28 @@
         void main() {
             gl_Position = vec4( position, 1.0 );
         }
-    </script>
-<script id="fragmentShader" type="x-shader/x-fragment">
-        uniform vec2 u_resolution;
-        uniform vec2 u_mouse;
-        uniform float u_time;
 
-        void main() {
-            vec2 st = gl_FragCoord.xy/u_resolution.xy;
-            vec2 m = u_mouse/u_resolution;
-            gl_FragColor=vec4(st.x/m.x,0.0,0.0,1.0);
-        }
-    </script>
+
+</script>
+<script id="fragmentShader" type="x-shader/x-fragment">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform float u_time;
+
+    void main() {
+        vec2 st = gl_FragCoord.xy/u_resolution.xy;
+        st.x *= u_resolution.x/u_resolution.y;
+
+        vec3 color = vec3(0.);
+        color = vec3(st.x,st.y,abs(sin(u_time)));
+
+        gl_FragColor = vec4(color,1.0);
+    }
+
+</script>
 </body>
 </html>
