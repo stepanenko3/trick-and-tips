@@ -10,6 +10,161 @@ import {throttle, debounce} from 'underscore';
 import * as THREE from 'three';
 import {TweenMax, Power3} from 'gsap';
 
+
+// THREE.JS 3D SVG
+(() => {
+    let vertexShader = document.getElementById('vertexShaderWater');
+    let fragmentShader = document.getElementById('fragmentShaderWater');
+    let container = document.getElementById('3d-svg');
+    if (container && vertexShader && fragmentShader) {
+        let camera, controls, scene, renderer, geometry;
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xcccccc);
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            container.appendChild(renderer.domElement);
+
+            camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 1, 3000);
+            camera.position.z = 500;
+
+            // controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+
+            let texture = (new THREE.TextureLoader).load('src/assets/img/particle.png');
+            let material = new THREE.PointCloudMaterial({
+                size: 10,
+                vertexColors: THREE.VertexColors,
+                map: texture
+            });
+
+            geometry = new THREE.Geometry();
+
+            let x, y, z;
+
+            for(let i = 0; i < 1; i++) {
+                x = 0;
+                y = 0;
+                z = 0;
+
+                geometry.vertices.push(new THREE.Vector3(x, y, z));
+                geometry.colors.push(new THREE.Color(Math.random(), Math.random(), Math.random()));
+            }
+
+            let pointCloud = new THREE.PointCloud(geometry, material);
+            scene.add(pointCloud);
+
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        let i = 0;
+        function animate() {
+            i++;
+            requestAnimationFrame(animate);
+
+            geometry.verticesNeedUpdate = true;
+
+            render();
+        }
+
+        function render() {
+            renderer.render(scene, camera);
+        }
+
+        init();
+    }
+})();
+
+
+// SIN COS EXPERIMENT
+(() => {
+    let canvas = document.getElementById('sin-cos-experiment');
+    if(canvas) {
+        let ctx = canvas.getContext('2d');
+
+        let t = 0;
+
+
+        function draw() {
+            ctx.clearRect(0, 0, 800, 600);
+            let i;
+            // for (i = 0; i < 360; i += 20) {
+            //     ctx.moveTo(i + 5, 180);
+            //     ctx.lineTo(i, 180);
+            //
+            // }
+            // ctx.stroke();
+
+            let counter = 1, x = 0, y = 180;
+
+            let increase = 90 / 180 * Math.PI / 9;
+            for (i = 0; i <= 960; i += 10) {
+
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                x = i;
+                y =  200 + 100 * Math.sin(counter + t);
+                counter += increase;
+
+                ctx.lineTo(x, y);
+                ctx.strokeStyle = '#fff';
+                ctx.stroke();
+                ctx.closePath();
+            }
+        }
+
+        function render() {
+            requestAnimationFrame(render);
+            t += 0.05;
+            draw();
+        }
+
+        render();
+    }
+})();
+
+// NEW YEAR THREE
+(() => {
+    let canvas = document.getElementById('new-year-three');
+    if(canvas) {
+        let ctx = canvas.getContext('2d');
+        let c = 70;
+        let t = 10;
+
+        function draw() {
+            for(let i = 0; i < c; i++) {
+                ctx.beginPath();
+                ctx.fillStyle = 'hsl(' + 10*(i%10) + ',100%,50%)';
+                ctx.arc(
+                    300 + 4*i * Math.sin(i*t),
+                    300 + 4*i * Math.cos(i*t),
+                    10, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+        function render() {
+            requestAnimationFrame(render);
+            ctx.clearRect(0, 0, 800, 600);
+            draw();
+            t += 0.00005;
+        }
+
+        render();
+    }
+})();
+
 // THREE.JS SHADER WATER
 (() => {
     let vertexShader = document.getElementById('vertexShaderWater');
